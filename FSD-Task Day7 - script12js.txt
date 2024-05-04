@@ -1,0 +1,43 @@
+
+var request = new XMLHttpRequest();
+request.open("GET","https://restcountries.com/v3.1/all");
+request.send();
+request.onload = function(){
+    var res = JSON.parse(request.response);
+    console.log(res);
+    
+    // Get all the countries from Asia continent /region using Filter method
+
+    var details_asia= res.filter((ele)=> ele.region == "Asia");
+    console.log(details_asia);
+
+    // Get all the countries with a population of less than 2 lakhs using Filter method
+
+    var details_population= res.filter((ele)=> ele.population < 200000);
+    console.log(details_population);
+
+    // Print the following details name, capital, flag, using forEach method
+
+    res.forEach(res => {
+        console.log("Name:",res.name.common,"||", " Capital:",res.capital,"||", " Flag:",res.flag)
+    });
+    
+
+    // Print the total population of countries using reduce method
+
+    var Totalpopulation = res.map((ele) => ele.population)
+    var result = Totalpopulation.reduce((sum,curr) => sum + curr,0);
+    console.log("Total population: ",result)
+
+    // Print the country that uses US dollars as currency.
+    
+    for(let country of res){
+        if(country.currencies && country.currencies.USD){
+            console.log(country.name.common)
+        }
+    }
+    
+    
+}
+
+
