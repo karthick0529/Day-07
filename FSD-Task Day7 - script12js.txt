@@ -18,9 +18,17 @@ request.onload = function(){
 
     // Print the following details name, capital, flag, using forEach method
 
-    res.forEach(res => {
-        console.log("Name:",res.name.common,"||", " Capital:",res.capital,"||", " Flag:",res.flag)
-    });
+    res.forEach(country => {
+        if (country.capital) { 
+          console.log('Name:', country.name.common);
+          console.log('Capital:', country.capital[0]);
+          console.log('Flag:', country.flags.svg);
+        } else {
+          console.log('Name:', country.name.common);
+          console.log('Capital: Not available');
+          console.log('Flag:', country.flags.svg);
+        }
+      });
     
 
     // Print the total population of countries using reduce method
